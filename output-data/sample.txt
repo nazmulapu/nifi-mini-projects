@@ -1,0 +1,6 @@
+Hello from NiFi!
+This is a test file to demonstrate data flow.
+Created on: October 21, 2025
+
+NiFi will pick up this file from /opt/input-data
+and move it to /opt/output-data automatically.

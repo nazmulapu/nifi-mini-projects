@@ -1,10 +1,10 @@
 # NiFi Mini Projects
 
-Just playing around with Apache NiFi using Docker. This is a simple setup to learn how NiFi works.
+Built this to understand NiFi data flows and containerized pipeline architecture. Uses Docker, NiFi Registry for version control, and implements basic file transfer patterns as a foundation.
 
 ## What's This?
 
-A basic NiFi environment that runs locally. I built a simple flow that moves files from one folder to another. Nothing fancy, just learning the basics.
+A local NiFi environment to explore flow concepts like processors, connections, and backpressure handling. Started with a simple file ingestion pattern to understand how data moves through NiFi pipelines.
 
 ## What You Need
 
@@ -51,21 +51,42 @@ echo "test" > input-data/test.txt
 docker-compose down
 ```
 
+## What I Learned
+
+Through this project, I explored:
+- NiFi flow architecture (processors, connections, relationships)
+- Docker Compose for managing multi-container environments
+- NiFi Registry integration for flow version control
+- Volume mounts and data persistence patterns
+- Basic security setup (environment variables, HTTPS vs HTTP considerations)
+
 ## NiFi Registry Setup
 
-Connected NiFi to Registry for version control:
+Connected NiFi to Registry for flow versioning:
 - Registry URL: http://nifi-registry:18080
 - Bucket: "File Transfer Flow"
-- Flow is now versioned and tracked
+- Flow changes are tracked and can be rolled back
+
+## Troubleshooting Notes
+
+Issues I ran into:
+- **NiFi Registry permissions**: Had to run as root user for database access
+- **Volume mounts**: Files created locally appear instantly in containers
+- **Port conflicts**: NiFi defaults to 8443 (HTTPS), Registry on 18080 (HTTP)
+- **Startup time**: NiFi takes 2-3 minutes to fully initialize
+
+## Next Steps
+
+Planning to add:
+- S3 integration for cloud storage patterns
+- Multi-flow scenarios (split, merge, route)
+- Basic monitoring setup to understand NiFi metrics
+- Error handling and retry patterns
 
 ## Notes
 
-- This is for learning, not production
-- NiFi uses HTTPS (port 8443), Registry uses HTTP (port 18080) - fine for local testing
-- Flow changes are tracked in NiFi Registry
-- All the data persists in Docker volumes
-
----
-
-Made this while learning NiFi. Feel free to use it if you're learning too.
+- Local development setup, not production-ready
+- Credentials managed via .env file (not committed)
+- All data persists in Docker volumes
+- Flow template available in `templates/` for quick import
 

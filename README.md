@@ -32,7 +32,9 @@ Pretty simple:
 - GetFile picks up files from `input-data` folder
 - PutFile drops them in `output-data` folder
 
-That's it. Just testing how data flows work.
+Saved it to NiFi Registry so I can track changes and reuse it later.
+
+**Want to skip the setup?** Import the pre-built template from the `templates/` folder.
 
 ## How to Test
 
@@ -49,10 +51,18 @@ echo "test" > input-data/test.txt
 docker-compose down
 ```
 
+## NiFi Registry Setup
+
+Connected NiFi to Registry for version control:
+- Registry URL: http://nifi-registry:18080
+- Bucket: "File Transfer Flow"
+- Flow is now versioned and tracked
+
 ## Notes
 
 - This is for learning, not production
-- NiFi Registry is also running on port 18080 but I haven't used it yet
+- NiFi uses HTTPS (port 8443), Registry uses HTTP (port 18080) - fine for local testing
+- Flow changes are tracked in NiFi Registry
 - All the data persists in Docker volumes
 
 ---

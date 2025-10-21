@@ -1,0 +1,48 @@
+version: '3.7'
+
+services:
+  nifi:
+    image: apache/nifi:1.23.2
+    container_name: nifi
+    ports:
+      - "8443:8443"
+    environment:
+      - NIFI_WEB_HTTPS_PORT=8443
+      - SINGLE_USER_CREDENTIALS_USERNAME=admin
+      - SINGLE_USER_CREDENTIALS_PASSWORD=ctsBtRBKHRAx69EqUghvvgEvjnaLjFEB
+    volumes:
+      - ./input-data:/opt/input-data
+      - ./output-data:/opt/output-data
+      - nifi-database-repository:/opt/nifi/nifi-current/database_repository
+      - nifi-flowfile-repository:/opt/nifi/nifi-current/flowfile_repository
+      - nifi-content-repository:/opt/nifi/nifi-current/content_repository
+      - nifi-provenance-repository:/opt/nifi/nifi-current/provenance_repository
+      - nifi-state:/opt/nifi/nifi-current/state
+      - nifi-logs:/opt/nifi/nifi-current/logs
+      - nifi-conf:/opt/nifi/nifi-current/conf
+    depends_on:
+      - nifi-registry
+    restart: unless-stopped
+
+  nifi-registry:
+    image: apache/nifi-registry:1.23.2
+    container_name: nifi-registry
+    ports:
+      - "18080:18080"
+    environment:
+      - NIFI_REGISTRY_WEB_HTTP_PORT=18080
+    volumes:
+      - nifi-registry-database:/opt/nifi-registry/nifi-registry-current/database
+      - nifi-registry-flow-storage:/opt/nifi-registry/nifi-registry-current/flow_storage
+    restart: unless-stopped
+
+volumes:
+  nifi-database-repository:
+  nifi-flowfile-repository:
+  nifi-content-repository:
+  nifi-provenance-repository:
+  nifi-state:
+  nifi-logs:
+  nifi-conf:
+  nifi-registry-database:
+  nifi-registry-flow-storage:

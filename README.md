@@ -1,2 +1,3 @@
-# nifi-mini-projects
-Mini Apache NiFi projects using Docker, NiFi Registry, and S3-based data flows.
+# 🧩 NiFi Mini Projects – Data Flows with Docker & Registry
+
+(Generated. Full content will be added below.)
